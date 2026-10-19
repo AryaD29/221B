@@ -4,10 +4,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>221B Baker Street | Detective's Study</title>
+    <title>221B | The Detective's Study</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Welcome to 221B Baker Street</h1>
-    <p>Your detective's study awaits.</p>
+    <div class="app-shell">
+
+        <aside class="sidebar">
+            <a class="brand" href="/">
+                <span class="brand-number">221B</span>
+                <span class="brand-subtitle">BAKER STREET · LONDON</span>
+            </a>
+
+            <div class="sidebar-divider"></div>
+
+            <p class="nav-heading">THE STUDY</p>
+            <nav class="navigation">
+                <a class="nav-link active" href="/">
+                    <span class="nav-icon">⌂</span> Morning Briefing
+                </a>
+                <a class="nav-link" href="#" data-section="cases">
+                    <span class="nav-icon">▤</span> Case Files
+                </a>
+                <a class="nav-link" href="#" data-section="chronology">
+                    <span class="nav-icon">◷</span> The Chronology
+                </a>
+                <a class="nav-link" href="#" data-section="habits">
+                    <span class="nav-icon">✳</span> Daily Rituals
+                </a>
+                <a class="nav-link" href="#" data-section="journal">
+                    <span class="nav-icon">✎</span> Detective's Journal
+                </a>
+                <a class="nav-link" href="#" data-section="board">
+                    <span class="nav-icon">▦</span> Investigation Board
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-divider"></div>
+                <p class="nav-heading">THE ENVIRONMENT</p>
+                <a class="nav-link" href="#" data-section="atmosphere">
+                    <span class="nav-icon">♫</span> Study Atmosphere
+                </a>
+
+                <div class="detective-card">
+                    <span class="detective-label">THE DETECTIVE'S MOTTO</span>
+                    <p>"It is a capital mistake to theorise before one has data."</p>
+                    <span class="detective-author">— Sherlock Holmes</span>
+                </div>
+                <div class="sidebar-footer">EST. 1887 · PRIVATE STUDY</div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="breadcrumb">221B <span>/</span> THE STUDY</div>
+                <div class="topbar-right">
+                    <span class="live-indicator"></span>
+                    <span>YOUR PRIVATE STUDY</span>
+                    <span class="avatar">S</span>
+                </div>
+            </header>
+
+            <section class="welcome-section">
+                <div class="welcome-copy">
+                    <p class="eyebrow"><span>✦</span> YOUR DAILY DISPATCH</p>
+                    <h1>Morning, Detective.</h1>
+                    <p class="welcome-description">
+                        A clear mind, a sharp eye, and a case worth solving.
+                        Let us see what the day holds.
+                    </p>
+                </div>
+                <div class="date-card">
+                    <span class="date-label">TODAY'S DATE</span>
+                    <span class="date-day" id="date-day">19</span>
+                    <span class="date-month" id="date-month">OCTOBER 2026</span>
+                    <span class="date-weekday" id="date-weekday">MONDAY</span>
+                </div>
+            </section>
+
+            <section class="summary-grid">
+                <article class="summary-card">
+                    <div class="summary-top">
+                        <span class="summary-label">ON THE AGENDA</span>
+                        <span class="summary-icon">▤</span>
+                    </div>
+                    <div class="summary-value" id="total-tasks">00</div>
+                    <p>Matters requiring attention</p>
+                    <div class="summary-foot"><span class="brass-dot"></span> Today's workload</div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-top">
+                        <span class="summary-label">CASES CLOSED</span>
+                        <span class="summary-icon">✓</span>
+                    </div>
+                    <div class="summary-value" id="completed-tasks">00</div>
+                    <p>Matters resolved today</p>
+                    <div class="summary-foot">Every detail counts</div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-top">
+                        <span class="summary-label">UNDER INVESTIGATION</span>
+                        <span class="summary-icon">⌕</span>
+                    </div>
+                    <div class="summary-value" id="active-cases">00</div>
+                    <p>Open case files</p>
+                    <div class="summary-foot">Progress, not haste</div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-top">
+                        <span class="summary-label">DAILY RITUALS</span>
+                        <span class="summary-icon">✳</span>
+                    </div>
+                    <div class="summary-value" id="habit-count">00</div>
+                    <p>Habits to keep in practice</p>
+                    <div class="summary-foot">Consistency is key</div>
+                </article>
+            </section>
+
+            <section class="workspace-grid">
+                <article class="panel agenda-panel">
+                    <div class="panel-header">
+                        <div>
+                            <p class="eyebrow">THE DAY'S PROCEEDINGS</p>
+                            <h2>Today's Agenda</h2>
+                        </div>
+                        <button class="text-button" id="view-all">VIEW ALL ↗</button>
+                    </div>
+
+                    <form id="quick-task-form" class="quick-task-form">
+                        <span class="input-prefix">＋</span>
+                        <input id="quick-task-input" type="text"
+                               placeholder="A matter has come to your attention..." 
+                               maxlength="180" required>
+                        <button type="submit" class="add-task-button">ADD TO AGENDA</button>
+                    </form>
+
+                    <div class="task-filters">
+                        <button class="filter-button active" data-filter="all">All matters</button>
+                        <button class="filter-button" data-filter="pending">Pending</button>
+                        <button class="filter-button" data-filter="completed">Resolved</button>
+                    </div>
+
+                    <div id="task-list" class="task-list">
+                        <div class="empty-state">
+                            <span class="empty-icon">✧</span>
+                            <h3>The casebook awaits.</h3>
+                            <p>Add your first matter above to begin the day's proceedings.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <aside class="right-column">
+                    <article class="panel focus-panel">
+                        <p class="eyebrow">A MOMENT OF CLARITY</p>
+                        <h2>The Prime Directive</h2>
+                        <div class="focus-rule"></div>
+                        <p class="focus-quote">
+                            "Nothing clears up a case so much as stating it to another person."
+                        </p>
+                        <p class="focus-author">SHERLOCK HOLMES · A STUDY IN SCARLET</p>
+                        <div class="focus-note">
+                            <span>✦</span>
+                            <p>One observation at a time. One deduction at a time.</p>
+                        </div>
+                    </article>
+
+                    <article class="panel activity-panel">
+                        <div class="panel-header">
+                            <div>
+                                <p class="eyebrow">YOUR PROGRESS</p>
+                                <h2>Today's Record</h2>
+                            </div>
+                            <span class="activity-icon">◷</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="progress-caption">
+                            <span id="progress-label">No matters resolved yet</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="activity-divider"></div>
+                        <div class="activity-row">
+                            <span class="activity-dot"></span>
+                            <span>Keep the evidence organised.</span>
+                        </div>
+                        <div class="activity-row">
+                            <span class="activity-dot"></span>
+                            <span>Leave room for the unexpected.</span>
+                        </div>
+                    </article>
+                </aside>
+            </section>
+
+            <footer class="page-footer">
+                <span>221B BAKER STREET · LONDON</span>
+                <span>THE GAME IS AFOOT.</span>
+            </footer>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
